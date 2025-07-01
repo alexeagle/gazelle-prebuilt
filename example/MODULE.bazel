@@ -1,13 +1,16 @@
+"Bazel dependencies"
 bazel_dep(name = "gazelle", version = "0.43.0")
 
 http_file = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 http_file(
     name = "gazelle_prebuilt_darwin_arm64",
+    executable = True,
     url = "https://github.com/alexeagle/gazelle-prebuilt/releases/download/2025.26.15+6938047/gazelle-darwin_arm64",
     sha256 = "148786ee9a809794e59b874d6cea7b73468c0220c862bac92bf2c5852bbf958f",
 )
 http_file(
     name = "gazelle_prebuilt_linux_amd64",
+    executable = True,
     url = "https://github.com/alexeagle/gazelle-prebuilt/releases/download/2025.26.15+6938047/gazelle-linux_amd64",
     sha256 = "8712796d280a9d38bb030a1d3930439767f9a7ff1d6ccfbd11e948e5504fe7b1",
 )
