@@ -18,6 +18,7 @@ single_version_override(
     patch_strip = 2,
     patches = ["patches/rules_python.patch"],
 )
+
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
 
 # Download an SDK for the host OS & architecture as well as common remote execution
