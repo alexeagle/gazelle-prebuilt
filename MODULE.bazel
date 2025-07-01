@@ -27,3 +27,9 @@ go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
 # Download an SDK for the host OS & architecture as well as common remote execution
 # platforms, with a specific version.
 go_sdk.download(version = "1.24.1")
+
+go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
+go_deps.module_override(
+    patches = ["patches/go-tree-sitter-cc_library.patch"],
+    path = "github.com/smacker/go-tree-sitter",
+)

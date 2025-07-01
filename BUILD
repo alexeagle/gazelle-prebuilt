@@ -7,6 +7,7 @@ gazelle_binary(
         "@gazelle//language/proto:go_default_library",
         "@gazelle//language/go:go_default_library",
         "@gazelle_cc//language/cc",
-        "@rules_python_gazelle_plugin//python",
+        # FIXME(alexeagle): get this to compile
+        # "@rules_python_gazelle_plugin//python",
     ],
 )
