@@ -1,6 +1,7 @@
 load("@gazelle//:def.bzl", "gazelle")
 
 # gazelle:prefix e2e
+# gazelle:map_kind bzl_library bzl_library @aspect_bazel_lib//:bzl_library.bzl
 gazelle(
     name = "gazelle",
     gazelle = select({
