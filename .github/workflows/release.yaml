@@ -56,7 +56,10 @@ jobs:
           $(jq --arg tag "${{ needs.tag.outputs.tag }}" -Rs -f filter.jq assets/CHECKSUMS)
           \`\`\`
           EOF
-          
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: 'assets/*'
       - uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.tag.outputs.tag }}
