@@ -22,7 +22,10 @@ single_version_override(
     module_name = "rules_python_gazelle_plugin",
     version = "1.4.1",
     patch_strip = 2,
-    patches = ["patches/rules_python.patch"],
+    patches = [
+        "patches/rules_python.patch",
+        "patches/rules_python.gazelle_version.patch",
+    ],
 )
 
 # For cgo
