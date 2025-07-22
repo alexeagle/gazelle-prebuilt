@@ -4,7 +4,7 @@ bazel_dep(name = "gazelle", version = "0.44.0")
 bazel_dep(name = "gazelle_cc", version = "0.1.0")
 bazel_dep(name = "rules_go", version = "0.55.1")
 bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.5.0")
-bazel_dep(name = "rules_python_gazelle_plugin", version = "1.4.1")
+bazel_dep(name = "rules_python_gazelle_plugin", version = "0.0.0")
 bazel_dep(name = "platforms", version = "1.0.0")
 
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
@@ -20,13 +20,13 @@ single_version_override(
 
 single_version_override(
     module_name = "rules_python_gazelle_plugin",
-    version = "1.4.1",
     patch_strip = 2,
     patches = [
         "patches/rules_python.patch",
-        "patches/rules_python.gazelle_version.patch",
     ],
+    version = "1.5.1",
 )
+
 
 # For cgo
 include("//:llvm.MODULE.bazel")
