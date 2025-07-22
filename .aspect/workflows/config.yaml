@@ -1,5 +1,6 @@
 # See https://docs.aspect.build/v/workflows/config
 tasks:
+  # TODO: add windows and other targets
   - build:
       name: linux_amd64
       targets:
@@ -21,12 +22,5 @@ tasks:
       bazel:
         flags:
           - --platforms=@rules_go//go/toolchain:darwin_arm64_cgo
-  - build:
-      name: windows_amd64
-      targets:
-        - //:gazelle
-      bazel:
-        flags:
-          - --platforms=@rules_go//go/toolchain:windows_amd64_cgo
 notifications:
   github: {}
