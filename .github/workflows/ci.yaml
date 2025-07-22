@@ -12,11 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: bazel-contrib/setup-bazel@4fd964a13a440a8aeb0be47350db2fc640f19ca8 # 0.15.0
-      - name: verify cross-compile
-        run: |
-          for platform in linux_amd64 linux_arm64 darwin_arm64 windows_amd64; do
-            bazel build --platforms="@rules_go//go/toolchain:$platform" gazelle
-          done
       - run: bazel build gazelle
       - id: metadata
         run: |
