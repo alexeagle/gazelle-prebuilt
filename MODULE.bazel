@@ -2,6 +2,7 @@
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
 bazel_dep(name = "gazelle", version = "0.44.0")
 bazel_dep(name = "gazelle_cc", version = "0.1.0")
+bazel_dep(name = "gazelle_kt")
 bazel_dep(name = "rules_go", version = "0.55.1")
 bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.5.0")
 bazel_dep(name = "rules_python_gazelle_plugin", version = "0.0.0")
@@ -10,6 +11,46 @@ bazel_dep(name = "platforms", version = "1.0.0")
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
 
 go_sdk.download(version = "1.24.1")
+
+git_override(
+    module_name = "gazelle_kt",
+    remote = "https://github.com/alexeagle/gazelle_kt.git",
+    commit = "3d883c03f9a69b9d0d013ba9f2acc7cb049ef50e",
+)
+
+go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
+
+go_deps.module_override(
+    patch_strip = 1,
+    patches = [
+        "patches/aspect-cli.only-kotlin.patch",
+        "patches/aspect-cli.only-kotlin-build.patch",
+        "patches/aspect-cli.cgo-binding.patch",
+    ],
+    path = "github.com/aspect-build/aspect-cli",
+)
+# Throw away BUILD files found in aspect-cli.
+# They depend on go modules like tree-sitter-typescript.
+go_deps.gazelle_override(
+    build_file_generation = "clean",
+    path = "github.com/aspect-build/aspect-cli",
+)
+
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "tree-sitter-kotlin",
+    build_file_content = """\
+package(default_visibility = ["//visibility:public"])
+filegroup(name = "srcs", srcs = glob(["src/**/*.c", "src/**/*.h"]))
+""",
+    sha256 = "7dd60975786bf9cb4be6a5176f5ccb5fed505f9929a012da30762505b1015669",
+    strip_prefix = "tree-sitter-kotlin-0.3.8",
+    urls = ["https://github.com/fwcd/tree-sitter-kotlin/archive/0.3.8.tar.gz"],
+)
+
+# See https://bazel.build/external/extension#overriding_and_injecting_module_extension_repos
+inject_repo(go_deps, "tree-sitter-kotlin")
 
 single_version_override(
     module_name = "gazelle",

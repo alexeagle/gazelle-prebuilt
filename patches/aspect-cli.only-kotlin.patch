@@ -1,0 +1,43 @@
+--- a/gazelle/common/treesitter/parser.go
++++ b/gazelle/common/treesitter/parser.go
+@@ -23,13 +23,7 @@
+ 	"path"
+ 	"unsafe"
+ 
+-	golang "github.com/aspect-build/aspect-cli/gazelle/common/treesitter/grammars/golang"
+-	"github.com/aspect-build/aspect-cli/gazelle/common/treesitter/grammars/java"
+-	"github.com/aspect-build/aspect-cli/gazelle/common/treesitter/grammars/json"
+ 	"github.com/aspect-build/aspect-cli/gazelle/common/treesitter/grammars/kotlin"
+-	"github.com/aspect-build/aspect-cli/gazelle/common/treesitter/grammars/starlark"
+-	"github.com/aspect-build/aspect-cli/gazelle/common/treesitter/grammars/tsx"
+-	"github.com/aspect-build/aspect-cli/gazelle/common/treesitter/grammars/typescript"
+ 	sitter "github.com/smacker/go-tree-sitter"
+ )
+ 
+@@ -78,25 +72,7 @@
+ }
+ 
+ func toSitterLanguage(lang LanguageGrammar) unsafe.Pointer {
+-	switch lang {
+-	case Go:
+-		return golang.Language()
+-	case Java:
+-		return java.Language()
+-	case JSON:
+-		return json.Language()
+-	case Kotlin:
+-		return kotlin.Language()
+-	case Starlark:
+-		return starlark.Language()
+-	case Typescript:
+-		return typescript.LanguageTypescript()
+-	case TypescriptX:
+-		return tsx.LanguageTSX()
+-	}
+-
+-	log.Panicf("Unknown LanguageGrammar %q", lang)
+-	return nil
++	return kotlin.Language()
+ }
+ 
+ func PathToLanguage(p string) LanguageGrammar {

@@ -1,0 +1,13 @@
+--- a/gazelle/common/treesitter/grammars/kotlin/BUILD.bazel
++++ b/gazelle/common/treesitter/grammars/kotlin/BUILD.bazel
+@@ -2,8 +2,9 @@
+ 
+ go_library(
+     name = "kotlin",
+-    srcs = ["binding.go"],
++    srcs = ["binding.go", "@tree-sitter-kotlin//:srcs"],
+     cgo = True,
++       copts = ["-Iexternal/+_repo_rules+tree-sitter-kotlin"],
+     importpath = "github.com/aspect-build/aspect-cli/gazelle/common/treesitter/grammars/kotlin",
+     visibility = ["//visibility:public"],
+ )

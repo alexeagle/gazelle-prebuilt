@@ -8,5 +8,6 @@ gazelle_binary(
         "@gazelle//language/go:go_default_library",
         "@gazelle_cc//language/cc",
         "@rules_python_gazelle_plugin//python",
+        "@gazelle_kt//kotlin",
     ],
 )
