@@ -1,6 +1,6 @@
 # Prebuilt Gazelle
 
-[Gazelle](https://github.com/bazelbuild/bazel-gazelle) is a tool for generating BUILD files for Bazel or compatible build systems.
+🚨 REPLACED by https://github.com/aspect-build/aspect-gazelle/
 
 ## Why prebuild?
 
